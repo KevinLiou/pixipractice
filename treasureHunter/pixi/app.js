@@ -218,7 +218,7 @@ function play(delta) {
             //Make the explorer semi-transparent
             explorer.alpha = 0.5;
             //Reduce the width of the health bar's inner rectangle by 1 pixel
-            healthBar.outer.width -= 100;
+            healthBar.outer.width -= 150;
         } else {
             //Make the explorer fully opaque (non-transparent) if it hasn't been hit
             explorer.alpha = 1;
