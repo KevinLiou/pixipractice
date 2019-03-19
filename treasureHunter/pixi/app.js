@@ -28,7 +28,7 @@ PIXI.loader
     .on("progress", loadProgressHandler)
     .load(setup);
 
-let explorer, treasure, blobs, door, message, blob_base_v = 2;
+let explorer, treasure, blobs, door, message;
 function setup() {
     //Initialize the game sprites, set the game `state` to `play`
     //and start the 'gameLoop'
@@ -125,7 +125,7 @@ function setup() {
     let numberOfBlobs = 6,
         spacing = 48,
         xOffset = 150,
-        speed = 2,
+        speed = 5,
         direction = 1;
 
     //An array to store all the blob monsters
@@ -136,7 +136,7 @@ function setup() {
         let y = randomInt(0, stage.height - blob.height)
         blob.position.set(x, y)
         blob.vy = speed * direction
-        direction *= -blob_base_v // Reverse the direction for the next blob
+        direction *= -1 // Reverse the direction for the next blob
         blobs.push(blob)
         gameScene.addChild(blob)
     }
@@ -205,7 +205,7 @@ function play(delta) {
         //If the blob hits the top or bottom of the stage, reverse
         //its direction
         if (blobHitsWall === "top" || blobHitsWall === "bottom") {
-            blob.vy *= -blob_base_v;
+            blob.vy *= -1;
         }
         var explorerHit = false
         //Test for a collision. If any of the enemies are touching
