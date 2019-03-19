@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hello World</title>
+  <script src="pixi/pixi.min.js"></script>
+  <style>* {padding: 0; margin: 0}</style>
+</head>
+<body>
+  <script type="text/javascript">
+    // https://github.com/Zainking/learningPixi#grouping
+    let type = "WebGL"
+    if(!PIXI.utils.isWebGLSupported()){
+      type = "canvas"
+    }
+
+    //Aliases
+    let Application = PIXI.Application,
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    Sprite = PIXI.Sprite,
+    TextureCache = PIXI.utils.TextureCache,
+    Rectangle = PIXI.Rectangle,
+    Graphics = PIXI.Graphics,
+    Text = PIXI.Text,
+    TextStyle = PIXI.TextStyle;
+
+    //Create a Pixi Application
+    let app = new PIXI.Application({
+        width: 256,         // default: 800
+        height: 256,        // default: 600
+        antialias: true,    // default: false  字体的边界和几何图形更加圆滑
+        transparent: false, // default: false 将整个Canvas标签的透明度进行了设置
+        resolution: 1,       // default: 1 让Pixi在不同的分辨率和像素密度的平台上运行变得简单
+        // forceCanvas: true, // 默认选择WebGL引擎渲染模式，它更快并且可以让你使用一些壮观的视觉特效  但是如果你需要强制使用Canvas引擎绘制而抛弃WebGL
+    });
+
+    // app.renderer.backgroundColor = 0x061639; 改变它的背景色
+    // 找到画布的宽高，使用app.renderer.view.width 和app.renderer.view.height
+
+    // 使用画布的resize方法可以改变canvas的大小，提供任何新的width 和 height变量给他都行。但是为了确认宽高的格式正确，将autoResize设置为true。
+    // app.renderer.autoResize = true;
+    // app.renderer.resize(512, 512);
+
+    // 全畫面
+    app.renderer.view.style.position = "absolute";
+    app.renderer.view.style.display = "block";
+    app.renderer.autoResize = true;
+    app.renderer.resize(window.innerWidth, window.innerHeight);
+    // <style>* {padding: 0; margin: 0}</style>
+
+    // 依照比例 https://github.com/kittykatattack/scaleToWindow
+
+
+    //Add the canvas that Pixi automatically created for you to the HTML document
+    document.body.appendChild(app.view);
+
+    PIXI.loader
+    .add([
+        "images/s2.png",
+        "images/tilemap.png",
+    ])
+    .on("progress", loadProgressHandler)
+    .load(setup);
+
+    function loadProgressHandler(loader, resource) {
+
+        //Display the file `url` currently being loaded
+        console.log("loading: " + resource.url);
+
+        //Display the percentage of files currently loaded
+        console.log("progress: " + loader.progress + "%");
+
+        //If you gave your files names as the first argument
+        //of the `add` method, you can access them like this
+        //console.log("loading: " + resource.name);
+    }
+
+
+    var sprite, state;
+
+    function setup() {
+        //This code will run when the loader has finished loading the image
+        let texture = TextureCache["images/tilemap.png"];        
+        texture.frame = new Rectangle(96, 64, 32, 32);
+        let rocket = new Sprite(texture);
+        rocket.position.set(64, 64)
+        app.stage.addChild(rocket);
+
+
+
+
+
+        sprite = new Sprite(
+            // PIXI.loader.resources["images/s2.png"].texture
+            TextureCache["images/s2.png"]
+        );
+        sprite.vy = 0;
+        sprite.vx = 0;
+        app.stage.addChild(sprite);
+        // app.stage.removeChild(anySprite)
+        // sprite.visible = false;
+
+        sprite.position.set(96, 96)
+        sprite.anchor.set(0.5, 0.5)
+        sprite.scale.set(0.5, 0.5);
+        sprite.rotation = 0.5
+        // cat.pivot.set(32, 32) // 改變原點座標
+
+
+        //Capture the keyboard arrow keys
+        let left = keyboard(37),
+            up = keyboard(38),
+            right = keyboard(39),
+            down = keyboard(40);
+
+        //Left arrow key `press` method
+        left.press = () => {
+            //Change the cat's velocity when the key is pressed
+            sprite.vx = -5;
+            sprite.vy = 0;
+        };
+
+        //Left arrow key `release` method
+        left.release = () => {
+            //If the left arrow has been released, and the right arrow isn't down,
+            //and the sprite isn't moving vertically:
+            //Stop the sprite
+            if (!right.isDown && sprite.vy === 0) {
+            sprite.vx = 0;
+            }
+        };
+
+        //Up
+        up.press = () => {
+            sprite.vy = -5;
+            sprite.vx = 0;
+        };
+        up.release = () => {
+            if (!down.isDown && sprite.vx === 0) {
+            sprite.vy = 0;
+            }
+        };
+
+        //Right
+        right.press = () => {
+            sprite.vx = 5;
+            sprite.vy = 0;
+        };
+        right.release = () => {
+            if (!left.isDown && sprite.vy === 0) {
+            sprite.vx = 0;
+            }
+        };
+
+        //Down
+        down.press = () => {
+            sprite.vy = 5;
+            sprite.vx = 0;
+        };
+        down.release = () => {
+            if (!up.isDown && sprite.vx === 0) {
+            sprite.vy = 0;
+            }
+        };
+        state = play
+
+
+        let rectangle = new Graphics();
+        rectangle.lineStyle(4, 0xFF3300, 1);
+        rectangle.beginFill(0x66CCFF);
+        rectangle.drawRect(0, 0, 64, 64);
+        rectangle.endFill();
+        rectangle.x = 170;
+        rectangle.y = 170;
+        app.stage.addChild(rectangle);
+
+        let circle = new Graphics();
+        circle.beginFill(0x9966FF);
+        circle.drawCircle(0, 0, 32);
+        circle.endFill();
+        circle.x = 64;
+        circle.y = 130;
+        app.stage.addChild(circle);
+
+        let style = new TextStyle({
+            fontFamily: "Arial",
+            fontSize: 36,
+            fill: "white",
+            stroke: '#ff3300',
+            strokeThickness: 4,
+            dropShadow: true,
+            dropShadowColor: "#000000",
+            dropShadowBlur: 4,
+            dropShadowAngle: Math.PI / 6,
+            dropShadowDistance: 6,
+        });
+        let message = new Text("Hello Pixi!", style);
+        message.position.set(54, 96);
+        app.stage.addChild(message);
+
+        //Start the game loop by adding the `gameLoop` function to
+        //Pixi's `ticker` and providing it with a `delta` argument.
+        app.ticker.add(delta => gameLoop(delta));
+
+        createDragAndDropFor(sprite)
+    }
+
+    function gameLoop(delta){
+
+        //Move the cat 1 pixel
+        // sprite.x += 1 + delta;
+        state(delta);
+
+    }
+
+    function play(delta){
+
+        // sprite.vx = 1;
+        // sprite.vy = 1;
+
+        // //Apply the velocity values to the cat's
+        // //position to make it move
+        sprite.x += sprite.vx;
+        sprite.y += sprite.vy;
+    }
+
+
+    var drag = false;  
+
+    function createDragAndDropFor(target) {
+        target.interactive = true;
+        target.on("mousedown", function(e) {
+            drag = target;
+        });
+        target.on("mouseup", function(e) {
+            drag = false;
+        });
+        target.on("mousemove", function(e) {
+            if (drag) {
+                drag.position.x = e.data.originalEvent.pageX - app.view.offsetLeft;
+                drag.position.y = e.data.originalEvent.pageY - app.view.offsetTop;
+            }
+        });
+    }
+
+    function keyboard(keyCode) {
+        let key = {};
+        key.code = keyCode;
+        key.isDown = false;
+        key.isUp = true;
+        key.press = undefined;
+        key.release = undefined;
+        //The `downHandler`
+        key.downHandler = event => {
+            if (event.keyCode === key.code) {
+            if (key.isUp && key.press) key.press();
+            key.isDown = true;
+            key.isUp = false;
+            }
+            event.preventDefault();
+        };
+
+        //The `upHandler`
+        key.upHandler = event => {
+            if (event.keyCode === key.code) {
+            if (key.isDown && key.release) key.release();
+            key.isDown = false;
+            key.isUp = true;
+            }
+            event.preventDefault();
+        };
+
+        //Attach event listeners
+        window.addEventListener(
+            "keydown", key.downHandler.bind(key), false
+        );
+        window.addEventListener(
+            "keyup", key.upHandler.bind(key), false
+        );
+        return key;
+    }
+
+  </script>
+</body>
+</html>
