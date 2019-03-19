@@ -28,7 +28,7 @@ PIXI.loader
     .on("progress", loadProgressHandler)
     .load(setup);
 
-let explorer, treasure, blobs, door, message, blob_base_v = 4;
+let explorer, treasure, blobs, door, message, blob_base_v = 2;
 function setup() {
     //Initialize the game sprites, set the game `state` to `play`
     //and start the 'gameLoop'
