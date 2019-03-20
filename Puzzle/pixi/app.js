@@ -446,7 +446,7 @@ function createDragAndDropFor(target) {
             let y = e.data.originalEvent.pageY ? e.data.originalEvent.pageY : e.data.originalEvent.changedTouches[0].clientY
             drag.position.x = x - app.view.offsetLeft - drag.width/2;
             drag.position.y = y - app.view.offsetTop - drag.height/2;
-            console.log(e.data)
+            // console.log(e.data)
         }
     });
 }
