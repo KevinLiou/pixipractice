@@ -405,16 +405,36 @@ var drag = false;
 
 function createDragAndDropFor(target) {
     target.interactive = true;
-    target.on("mousedown", function(e) {
-        drag = target;
-    });
-    target.on("mouseup", function(e) {
-        drag = false;
-    });
-    target.on("mousemove", function(e) {
+    // target.on("mousedown", function(e) {
+    //     drag = target;
+    // });
+    // target.on("mouseup", function(e) {
+    //     drag = false;
+    // });
+    // target.on("mousemove", function(e) {
+    //     if (drag) {
+    //         drag.position.x = e.data.originalEvent.pageX - app.view.offsetLeft - drag.width/2;
+    //         drag.position.y = e.data.originalEvent.pageY - app.view.offsetTop - drag.height/2;
+    //     }
+    // });
+
+    target.on('pointerdown', function (e) {
+        drag = target
+    })
+    target.on('pointerup', function (e) {
+        drag = false
+    })
+    target.on('pointerupoutside', function (e) {
+        drag = false
+    })
+    target.on('pointermove', function (e) {
         if (drag) {
-            drag.position.x = e.data.originalEvent.pageX - app.view.offsetLeft - drag.width/2;
-            drag.position.y = e.data.originalEvent.pageY - app.view.offsetTop - drag.height/2;
+            // let targetHitsWall = contain(target, { x: 8, y: 10, width: 488, height: 480 });
+            // console.log(target.getGlobalPosition().x, target.getGlobalPosition().y)
+            // if (!targetHitsWall) {
+                drag.position.x = e.data.originalEvent.pageX - app.view.offsetLeft - drag.width/2;
+                drag.position.y = e.data.originalEvent.pageY - app.view.offsetTop - drag.height/2;
+            // }
         }
     });
 }
