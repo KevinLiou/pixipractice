@@ -67,9 +67,12 @@ function setup() {
     tips.scale.set(0.8, 0.8)
     tips.interactive = true; // 設定可以互動
     tips.buttonMode = true; // 當滑鼠滑過時顯示為手指圖示
-    tips.click = function(){
+    tips.on('pointerdown', function(e) {
         state = show_tips
-    }
+    });
+    // tips.click = function(){
+    //     state = show_tips
+    // }
     gameScene.addChild(tips)
     
 
@@ -148,10 +151,10 @@ function setup() {
     gameTipsScene.addChild(tip_bg)
     tip_bg.interactive = true; // 設定可以互動
     tip_bg.buttonMode = true; // 當滑鼠滑過時顯示為手指圖示
-    tip_bg.click = function(){
+    tip_bg.on('pointerdown', function(e) {
         state = play
         gameTipsScene.visible = false
-    }
+    })
 
     let tip_img = new Sprite(resources["images/1.jpg"].texture)
     let height_scale = (height/(tip_img.height)) 
