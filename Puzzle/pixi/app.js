@@ -439,12 +439,14 @@ function createDragAndDropFor(target) {
     })
     target.on('pointermove', function (e) {
         if (drag) {
-            // let targetHitsWall = contain(target, { x: 8, y: 10, width: 488, height: 480 });
-            // console.log(target.getGlobalPosition().x, target.getGlobalPosition().y)
-            // if (!targetHitsWall) {
-                drag.position.x = e.data.originalEvent.pageX - app.view.offsetLeft - drag.width/2;
-                drag.position.y = e.data.originalEvent.pageY - app.view.offsetTop - drag.height/2;
-            // }
+            // drag.position.x = e.data.originalEvent.pageX - app.view.offsetLeft - drag.width/2;
+            // drag.position.y = e.data.originalEvent.pageY - app.view.offsetTop - drag.height/2;
+
+            let x = e.data.originalEvent.pageX ? e.data.originalEvent.pageX : e.data.originalEvent.changedTouches[0].clientX
+            let y = e.data.originalEvent.pageY ? e.data.originalEvent.pageY : e.data.originalEvent.changedTouches[0].clientY
+            drag.position.x = x - app.view.offsetLeft - drag.width/2;
+            drag.position.y = y - app.view.offsetTop - drag.height/2;
+            console.log(e.data)
         }
     });
 }
