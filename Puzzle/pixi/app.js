@@ -205,7 +205,7 @@ function play(delta) {
 
     if (match_count == 16) {
         state = end
-        message.text = "Finished!"
+        message.text = "過關囉!"
     }
 }
 
