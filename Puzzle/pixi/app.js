@@ -35,7 +35,8 @@ PIXI.loader
         "images/bg.jpeg",
         "images/1.json",
         "images/icon.png",
-        "images/light.gif"
+        "images/light.gif",
+        "images/s2.png"
     ])
     .on("progress", loadProgressHandler)
     .load(setup);
@@ -123,6 +124,12 @@ function setup() {
     gameOverScene = new Container();
     app.stage.addChild(gameOverScene);
     gameOverScene.visible = false;
+    
+    let sprite = new Sprite(resources["images/s2.png"].texture)
+    sprite.position.set(width - width/4, height)
+    sprite.anchor.set(0.5, 1)
+    sprite.scale.set(0.5, 0.5);
+    gameOverScene.addChild(sprite)
 
     // 創建文字
     let style = new TextStyle({
