@@ -35,7 +35,7 @@ PIXI.loader
         "images/bg.jpeg",
         "images/1.json",
         "images/icon.png",
-        "images/light.gif",
+        "images/light.png",
         "images/s2.png"
     ])
     .on("progress", loadProgressHandler)
@@ -45,106 +45,19 @@ var puzzles = [], matchs = [];
 var gameScene, gameTipsScene, gameOverScene;
 function setup() {
     // 創建遊戲場景
-    gameScene = new Container();
-    app.stage.addChild(gameScene);
-    // gameScene.visible = false;
-    gameScene.updateLayersOrder = function () {
-        gameScene.children.sort(function(a,b) {
-            a.zIndex = a.zIndex || 0;
-            b.zIndex = b.zIndex || 0;
-            return b.zIndex - a.zIndex
-        });
-    }
-
-    let bg = new Sprite(resources["images/bg.jpeg"].texture)
-    let bg_scale = (width/bg.width) 
-    bg.scale.set(bg_scale, bg_scale)
-    bg.alpha = 0.7
-    gameScene.addChild(bg)
-
-    let tips = new Sprite(resources["images/light.gif"].texture)
-    tips.x = 15
-    tips.y = 15
-    tips.scale.set(0.8, 0.8)
-    tips.interactive = true; // 設定可以互動
-    tips.buttonMode = true; // 當滑鼠滑過時顯示為手指圖示
-    tips.on('pointerdown', function(e) {
-        state = show_tips
-    });
-    // tips.click = function(){
-    //     state = show_tips
-    // }
-    gameScene.addChild(tips)
-    
-
-    //Create an alias for the texture atlas frame ids
-    // console.log(resources["images/1.json"])
-    id = resources["images/1.json"].textures;
-
-    for (let index = 0; index < 16; index++) {
-        pic = new Sprite(id[ (index+1) + ".jpg"])
-        let height_scale = (height/(pic.height*4)) 
-        let scale = height_scale * 0.90
-        pic.scale.set(scale, scale)
-        pic.zIndex = randomInt(-100,-300)
-        pic.x = width/5 + randomInt(-width/6, width/6)
-        pic.y = height/2 - pic.height/2 + randomInt(-height/3, height/3)
-
-        var dropShadowFilter = new PIXI.filters.DropShadowFilter()
-        dropShadowFilter.color = 0x000020;
-        dropShadowFilter.alpha = 0.2;
-        dropShadowFilter.blur = 3;
-        dropShadowFilter.distance = 10;
-        pic.filters = [dropShadowFilter]
-
-        puzzles.push(pic)
-        gameScene.addChild(pic)
-
-        let rectangle = new Graphics();
-        rectangle.lineStyle(3, 0x333333, 1);
-        rectangle.beginFill(0xaaaaaa, 0.6);
-        rectangle.drawRect(0, 0, pic.width, pic.height);
-        rectangle.endFill();
-
-        let x = (index%4) * pic.width
-        let y = Math.floor(index/4) * pic.width
-        rectangle.x = x + width/2
-        rectangle.y = (height - pic.height * 4)/2 + y
-        gameScene.addChild(rectangle)
-        matchs.push(rectangle)
-        
-        createDragAndDropFor(pic)
-        
-    }
-
-    gameScene.updateLayersOrder()
-
+    createGameScene()
 
     // 創建結束場景
-    gameOverScene = new Container();
-    app.stage.addChild(gameOverScene);
-    gameOverScene.visible = false;
-    
-    let sprite = new Sprite(resources["images/s2.png"].texture)
-    sprite.position.set(width - width/4, height)
-    sprite.anchor.set(0.5, 1)
-    sprite.scale.set(0.5, 0.5);
-    gameOverScene.addChild(sprite)
-
-    // 創建文字
-    let style = new TextStyle({
-        fontFamily: "Futura",
-        fontSize: 64,
-        fill: "black"
-    });
-    message = new Text("The End!", style);
-    message.anchor.set(0.5, 0.5)
-    message.x = width/2
-    message.y = height/2
-    gameOverScene.addChild(message);
-
+    createGameOverScene()
 
     // 創建提示場景
+    createGameTipScene()
+
+    state = play
+    app.ticker.add(delta => gameLoop(delta))
+}
+
+function createGameTipScene() {
     gameTipsScene = new Container();
     gameTipsScene.width = width
     gameTipsScene.height = height
@@ -171,9 +84,108 @@ function setup() {
     tip_img.scale.set(scale, scale)
     tip_img.filters = [new PIXI.filters.BlurFilter(1, 5, 5, 15)]
     gameTipsScene.addChild(tip_img)
+}
 
-    state = play
-    app.ticker.add(delta => gameLoop(delta));
+function createGameOverScene() {
+    gameOverScene = new Container();
+    app.stage.addChild(gameOverScene);
+    gameOverScene.visible = false;
+    
+    let sprite = new Sprite(resources["images/s2.png"].texture)
+    sprite.position.set(width - width/4, height)
+    sprite.anchor.set(0.5, 1)
+    sprite.scale.set(0.5, 0.5);
+    gameOverScene.addChild(sprite)
+
+    // 創建文字
+    let style = new TextStyle({
+        fontFamily: "Futura",
+        fontSize: 64,
+        fill: "black"
+    });
+    message = new Text("The End!", style);
+    message.anchor.set(0.5, 0.5)
+    message.x = width/2
+    message.y = height/2
+    gameOverScene.addChild(message);
+}
+
+function createGameScene() {
+    gameScene = new Container();
+    app.stage.addChild(gameScene);
+
+    let bg = new Sprite(resources["images/bg.jpeg"].texture)
+    let bg_scale = (width/bg.width) 
+    bg.scale.set(bg_scale, bg_scale)
+    bg.alpha = 0.7
+    gameScene.addChild(bg)
+
+    let tips = new Sprite(resources["images/light.png"].texture)
+    tips.anchor.set(0.5)
+    tips.rotation = -20 * (Math.PI / 180)
+    tips.scale.set(0.5, 0.5)
+    tips.interactive = true
+    tips.buttonMode = true
+    tips.x = 45
+    tips.y = 45
+    tips.pointerdown = function(e) {
+        state = show_tips
+    }
+    tips.mouseover = function(mouseData) {
+        this.scale.set(1.1*0.5)
+    }
+
+    tips.mouseout = function(mouseData) {
+        this.scale.set(1*0.5)
+    }
+    makeShadowFilter(tips)
+
+    textures = resources["images/1.json"].textures;
+    for (let index = 0; index < 16; index++) {
+        pic = new Sprite(textures[ (index+1) + ".jpg"])
+        let height_scale = (height/(pic.height*4)) 
+        let scale = height_scale * 0.90
+        pic.scale.set(scale, scale)
+        pic.x = width/5 + randomInt(-width/6, width/6)
+        pic.y = height/2 - pic.height/2 + randomInt(-height/3, height/3)
+        makeShadowFilter(pic)
+        createDragAndDropFor(pic)
+        puzzles.push(pic)
+        
+
+
+        let rectangle = new Graphics();
+        rectangle.lineStyle(3, 0x333333, 1);
+        rectangle.beginFill(0xaaaaaa, 0.6);
+        rectangle.drawRect(0, 0, pic.width, pic.height);
+        rectangle.endFill();
+
+        let x = (index%4) * pic.width
+        let y = Math.floor(index/4) * pic.width
+        rectangle.x = x + width/2
+        rectangle.y = (height - pic.height * 4)/2 + y
+        gameScene.addChild(rectangle)
+        matchs.push(rectangle)
+    }
+
+    for (let index = 0; index < puzzles.length; index++) {
+        const element = puzzles[index];
+        gameScene.addChild(element)
+    }
+    gameScene.addChild(tips)
+}
+
+function makeShadowFilter(target) {
+    var dropShadowFilter = new PIXI.filters.DropShadowFilter()
+    dropShadowFilter.color = 0x000020
+    dropShadowFilter.alpha = 0.2
+    dropShadowFilter.blur = 3
+    dropShadowFilter.distance = 10
+    if (target.filters) {
+        target.filters.push(dropShadowFilter)
+    }else{
+        target.filters = [dropShadowFilter]
+    }
 }
 
 function gameLoop(delta) {
@@ -188,18 +200,8 @@ function play(delta) {
         const puzzle = puzzles[index]
         const match = matchs[index]
         if (checkMatch(puzzles[index], matchs[index])) {
-            // match.clear()
-            // match.lineStyle(4, 0xFF3300, 0.5);
-            // match.beginFill(0x44AADD);
-            // match.drawRect(0, 0, pic.width, pic.height);
-            // match.endFill();
             match_count += 1
         }else{
-            // match.clear()
-            // match.lineStyle(4, 0xFF3300, 0.5);
-            // match.beginFill(0x66CCFF);
-            // match.drawRect(0, 0, pic.width, pic.height);
-            // match.endFill();
         }
     }
 
@@ -430,6 +432,12 @@ function createDragAndDropFor(target) {
 
     target.on('pointerdown', function (e) {
         drag = target
+
+        // let indexs = gameScene.children.map(function(item, index, array) {
+        //     return gameScene.getChildIndex(item)
+        // })
+        // let max_index = Math.max(...indexs)
+        gameScene.setChildIndex(target, gameScene.children.length-1)
     })
     target.on('pointerup', function (e) {
         drag = false
