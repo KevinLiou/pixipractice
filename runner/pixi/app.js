@@ -135,12 +135,14 @@ function createGameScene() {
         this.textures = run_frames
         this.type = "run"
         this.animationSpeed = 0.4
+        this.loop = true
         this.play()
     }
     anim.idle = function() {
         this.textures = idle_frames
         this.type = "idle"
         this.animationSpeed = 0.3
+        this.loop = true
         this.play()
     }
     anim.turn = function(direction = -1) {
@@ -152,6 +154,7 @@ function createGameScene() {
         this.textures = walk_frames
         this.type = "walk"
         this.animationSpeed = 0.3
+        this.loop = true
         this.play()
     }
     anim.jump = function() {
@@ -166,6 +169,11 @@ function createGameScene() {
         this.animationSpeed = 0.3
         this.loop = false
         this.play()
+    }
+    anim.speed_up = function() {
+        if (this.type == "run") {
+            this.animationSpeed = (this.animationSpeed < 1) ? this.animationSpeed + 0.2 : this.animationSpeed
+        }
     }
     anim.onComplete = function() {
         if (this.type == "run") {
@@ -248,6 +256,17 @@ function createGameScene() {
     }
     makeShadowFilter(dead)
     gameScene.addChild(dead)
+
+    var speed_up = new Text("快跑加速")
+    speed_up.interactive = true
+    speed_up.buttonMode = true
+    speed_up.x = 45
+    speed_up.y = 245
+    speed_up.pointerdown = function(e) {
+        anim.speed_up()
+    }
+    makeShadowFilter(speed_up)
+    gameScene.addChild(speed_up)
 }
 
 function makeShadowFilter(target) {
