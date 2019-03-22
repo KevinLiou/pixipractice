@@ -32,7 +32,10 @@ app.renderer.backgroundColor = 0xedfcff;
 PIXI.loader
     .add([
         "images/run.json",
-        "images/idle.json"
+        "images/idle.json",
+        "images/walk.json",
+        "images/jump.json",
+        "images/dead.json"
     ])
     .on("progress", loadProgressHandler)
     .load(setup);
@@ -110,24 +113,27 @@ function createGameScene() {
     gameScene = new Container();
     app.stage.addChild(gameScene);
 
-    var running_frames = [];
-    for (var i = 0; i < 15; i++) {
-        running_frames.push(PIXI.Texture.fromFrame('run' + i + '.png'));
-    }
-
+    var run_frames = []
     var idle_frames = []
+    var walk_frames = []
+    var jump_frames = []
+    var dead_frames = []
     for (var i = 0; i < 15; i++) {
-        idle_frames.push(PIXI.Texture.fromFrame('idle' + i + '.png'));
+        run_frames.push(PIXI.Texture.fromFrame('Run (' + (i + 1) + ').png'))
+        idle_frames.push(PIXI.Texture.fromFrame('Idle (' + (i + 1) + ').png'))
+        walk_frames.push(PIXI.Texture.fromFrame('Walk (' + (i + 1) + ').png'))
+        jump_frames.push(PIXI.Texture.fromFrame('Jump (' + (i + 1) + ').png'))
+        dead_frames.push(PIXI.Texture.fromFrame('Dead (' + (i + 1) + ').png'))
     }
 
     var anim = new PIXI.extras.AnimatedSprite(idle_frames);
     anim.scale.set(0.5, 0.5)
     anim.x = app.screen.width / 2;
     anim.y = app.screen.height / 2;
-    anim.anchor.set(0.5, 0.5)
-    anim.running = function() {
-        this.textures = running_frames
-        this.type = "running"
+    anim.anchor.set(0.2, 0.5)
+    anim.run = function() {
+        this.textures = run_frames
+        this.type = "run"
         this.animationSpeed = 0.4
         this.play()
     }
@@ -139,27 +145,54 @@ function createGameScene() {
     }
     anim.turn = function(direction = -1) {
         this.direction = direction
-        this.scale.set(this.scale.x * this.direction, this.scale.y)
+        this.scale.set( Math.abs(this.scale.x) * this.direction, this.scale.y)
         console.log(this.position.x, this.position.y)
     }
+    anim.walk = function() {
+        this.textures = walk_frames
+        this.type = "walk"
+        this.animationSpeed = 0.3
+        this.play()
+    }
+    anim.jump = function() {
+        this.textures = jump_frames
+        this.animationSpeed = 0.3
+        this.loop = false
+        this.play()
+    }
+    anim.dead = function() {
+        this.textures = dead_frames
+        this.type = "dead"
+        this.animationSpeed = 0.3
+        this.loop = false
+        this.play()
+    }
+    anim.onComplete = function() {
+        if (this.type == "run") {
+            this.run()
+        }else if(this.type == "walk") {
+            this.walk()
+        }else if(this.type == "dead"){
+            // ...
+        }else{
+            this.idle()
+        }
+    }
     anim.idle()
-    anim.turn(1)
+    anim.direction = 1
     gameScene.addChild(anim);
 
 
-    var text = new Text("前進")
-    text.interactive = true
-    text.buttonMode = true
-    text.x = 45
-    text.y = 35
-    text.pointerdown = function(e) {
-        if (anim.type == "idle") {
-            anim.running()
-        }else{
-            anim.idle()
-        }
+    var run = new Text("快跑")
+    run.interactive = true
+    run.buttonMode = true
+    run.x = 45
+    run.y = 35
+    run.pointerdown = function(e) {
+        anim.run()
     }
-    gameScene.addChild(text)
+    makeShadowFilter(run)
+    gameScene.addChild(run)
 
     var turn = new Text("轉向")
     turn.interactive = true
@@ -167,17 +200,62 @@ function createGameScene() {
     turn.x = 45
     turn.y = 70
     turn.pointerdown = function(e) {
-        anim.turn(-1)
+        anim.turn(-1*anim.direction)
     }
+    makeShadowFilter(turn)
     gameScene.addChild(turn)
+
+    var walk = new Text("慢慢走")
+    walk.interactive = true
+    walk.buttonMode = true
+    walk.x = 45
+    walk.y = 105
+    walk.pointerdown = function(e) {
+        anim.walk()
+    }
+    makeShadowFilter(walk)
+    gameScene.addChild(walk)
+
+    var idle = new Text("停止")
+    idle.interactive = true
+    idle.buttonMode = true
+    idle.x = 45
+    idle.y = 140
+    idle.pointerdown = function(e) {
+        anim.idle()
+    }
+    makeShadowFilter(idle)
+    gameScene.addChild(idle)
+
+    var jump = new Text("跳躍")
+    jump.interactive = true
+    jump.buttonMode = true
+    jump.x = 45
+    jump.y = 175
+    jump.pointerdown = function(e) {
+        anim.jump()
+    }
+    makeShadowFilter(jump)
+    gameScene.addChild(jump)
+
+    var dead = new Text("死亡")
+    dead.interactive = true
+    dead.buttonMode = true
+    dead.x = 45
+    dead.y = 210
+    dead.pointerdown = function(e) {
+        anim.dead()
+    }
+    makeShadowFilter(dead)
+    gameScene.addChild(dead)
 }
 
 function makeShadowFilter(target) {
     var dropShadowFilter = new PIXI.filters.DropShadowFilter()
     dropShadowFilter.color = 0x000020
     dropShadowFilter.alpha = 0.2
-    dropShadowFilter.blur = 3
-    dropShadowFilter.distance = 10
+    dropShadowFilter.blur = 2
+    dropShadowFilter.distance = 5
     if (target.filters) {
         target.filters.push(dropShadowFilter)
     }else{
