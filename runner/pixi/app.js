@@ -22,9 +22,25 @@ document.body.appendChild(app.view);
 
 // 全畫面 寬高比 2:1
 app.renderer.view.style.position = "absolute"
-app.renderer.autoResize = true;
-var width = (window.innerWidth > 900) ? 900 : window.innerWidth
-var height = height = width / 2 // window.innerHeight
+app.renderer.autoResize = true
+
+let game_width = 1600
+let game_height = 800
+let gameScale = game_height/game_width
+let screenScale = window.innerHeight/window.innerWidth
+var width, height, scale;
+
+if (gameScale < screenScale) {
+    // 左右撐滿
+    scale = (window.innerWidth/game_width)
+    width = game_width * scale
+    height = game_height * scale
+}else{
+    // 上下撐滿
+    scale = (window.innerHeight/game_height)
+    width = game_width * scale
+    height = game_height * scale
+}
 
 app.renderer.resize(width, height)
 app.renderer.backgroundColor = 0xedfcff;
@@ -127,7 +143,7 @@ function createGameScene() {
     }
 
     var anim = new PIXI.extras.AnimatedSprite(idle_frames);
-    anim.scale.set(0.5, 0.5)
+    anim.scale.set(0.3)
     anim.x = app.screen.width / 2;
     anim.y = app.screen.height / 2;
     anim.anchor.set(0.2, 0.5)
