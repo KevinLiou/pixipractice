@@ -1,6 +1,6 @@
 {
 	"frames": {
-		"Idle (10).png": {
+		"walk1_10.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
@@ -20,7 +20,7 @@
 				"h": 564
 			}
 		},
-		"Idle (11).png": {
+		"walk1_11.png": {
 			"frame": {
 				"x": 617,
 				"y": 1,
@@ -40,7 +40,7 @@
 				"h": 564
 			}
 		},
-		"Idle (12).png": {
+		"walk1_12.png": {
 			"frame": {
 				"x": 1233,
 				"y": 1,
@@ -60,7 +60,7 @@
 				"h": 564
 			}
 		},
-		"Idle (13).png": {
+		"walk1_13.png": {
 			"frame": {
 				"x": 1849,
 				"y": 1,
@@ -80,7 +80,7 @@
 				"h": 564
 			}
 		},
-		"Idle (14).png": {
+		"walk1_14.png": {
 			"frame": {
 				"x": 2465,
 				"y": 1,
@@ -100,7 +100,7 @@
 				"h": 564
 			}
 		},
-		"Idle (15).png": {
+		"walk1_15.png": {
 			"frame": {
 				"x": 3081,
 				"y": 1,
@@ -120,7 +120,7 @@
 				"h": 564
 			}
 		},
-		"Idle (1).png": {
+		"walk1_1.png": {
 			"frame": {
 				"x": 3697,
 				"y": 1,
@@ -140,7 +140,7 @@
 				"h": 564
 			}
 		},
-		"Idle (2).png": {
+		"walk1_2.png": {
 			"frame": {
 				"x": 4313,
 				"y": 1,
@@ -160,7 +160,7 @@
 				"h": 564
 			}
 		},
-		"Idle (3).png": {
+		"walk1_3.png": {
 			"frame": {
 				"x": 4929,
 				"y": 1,
@@ -180,7 +180,7 @@
 				"h": 564
 			}
 		},
-		"Idle (4).png": {
+		"walk1_4.png": {
 			"frame": {
 				"x": 5545,
 				"y": 1,
@@ -200,7 +200,7 @@
 				"h": 564
 			}
 		},
-		"Idle (5).png": {
+		"walk1_5.png": {
 			"frame": {
 				"x": 6161,
 				"y": 1,
@@ -220,7 +220,7 @@
 				"h": 564
 			}
 		},
-		"Idle (6).png": {
+		"walk1_6.png": {
 			"frame": {
 				"x": 6777,
 				"y": 1,
@@ -240,7 +240,7 @@
 				"h": 564
 			}
 		},
-		"Idle (7).png": {
+		"walk1_7.png": {
 			"frame": {
 				"x": 7393,
 				"y": 1,
@@ -260,7 +260,7 @@
 				"h": 564
 			}
 		},
-		"Idle (8).png": {
+		"walk1_8.png": {
 			"frame": {
 				"x": 8009,
 				"y": 1,
@@ -280,7 +280,7 @@
 				"h": 564
 			}
 		},
-		"Idle (9).png": {
+		"walk1_9.png": {
 			"frame": {
 				"x": 8625,
 				"y": 1,
@@ -304,7 +304,7 @@
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "idle.png",
+		"image": "walk1.png",
 		"format": "RGBA8888",
 		"size": {
 			"w": 9240,

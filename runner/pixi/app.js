@@ -47,17 +47,23 @@ app.renderer.backgroundColor = 0xedfcff;
 
 PIXI.loader
     .add([
-        "images/run.json",
-        "images/idle.json",
-        "images/walk.json",
-        "images/jump.json",
-        "images/dead.json"
+        "images/bg/bg.png",
+        "images/adventurer/1/run1.json",
+        "images/adventurer/1/idle1.json",
+        "images/adventurer/1/walk1.json",
+        "images/adventurer/1/jump1.json",
+        "images/adventurer/1/dead1.json",
+        "images/adventurer/2/run2.json",
+        "images/adventurer/2/idle2.json",
+        "images/adventurer/2/walk2.json",
+        "images/adventurer/2/jump2.json",
+        "images/adventurer/2/dead2.json"
     ])
     .on("progress", loadProgressHandler)
     .load(setup);
 
 var puzzles = [], matchs = [];
-var gameScene, gameTipsScene, gameOverScene;
+var gameScene, gameTipsScene, gameOverScene, bg;
 function setup() {
     // 創建遊戲場景
     createGameScene()
@@ -128,25 +134,44 @@ function createGameOverScene() {
 function createGameScene() {
     gameScene = new Container();
     app.stage.addChild(gameScene);
+    bg = new PIXI.extras.TilingSprite(
+        PIXI.Texture.fromImage("images/bg/bg.png"),
+        app.screen.width,
+        app.screen.height
+    )
+    bg.tileScale.set(scale)
+    gameScene.addChild(bg);
 
+    var role = 1
     var run_frames = []
     var idle_frames = []
     var walk_frames = []
     var jump_frames = []
     var dead_frames = []
-    for (var i = 0; i < 15; i++) {
-        run_frames.push(PIXI.Texture.fromFrame('Run (' + (i + 1) + ').png'))
-        idle_frames.push(PIXI.Texture.fromFrame('Idle (' + (i + 1) + ').png'))
-        walk_frames.push(PIXI.Texture.fromFrame('Walk (' + (i + 1) + ').png'))
-        jump_frames.push(PIXI.Texture.fromFrame('Jump (' + (i + 1) + ').png'))
-        dead_frames.push(PIXI.Texture.fromFrame('Dead (' + (i + 1) + ').png'))
-    }
+
+    let actions = ["run", "idle", "walk", "jump", "dead"]
+    actions.map(function(value, index, array) {
+        let number_of_frames = Object.keys(resources["images/adventurer/" + role + "/" + value + "" + role + ".json"].textures).length
+        for (var i = 0; i < number_of_frames; i++) {
+            if(value == "run") {
+                run_frames.push(PIXI.Texture.fromFrame('run' + role + '_' + (i + 1) + '.png'))
+            }else if(value == "idle") {
+                idle_frames.push(PIXI.Texture.fromFrame('idle' + role + '_' + (i + 1) + '.png'))
+            }else if(value == "walk") {
+                walk_frames.push(PIXI.Texture.fromFrame('walk' + role + '_' + (i + 1) + '.png'))
+            }else if(value == "jump") {
+                jump_frames.push(PIXI.Texture.fromFrame('jump' + role + '_' + (i + 1) + '.png'))
+            }else if(value == "dead") {
+                dead_frames.push(PIXI.Texture.fromFrame('dead' + role + '_' + (i + 1) + '.png'))
+            }
+        }
+    })
 
     var anim = new PIXI.extras.AnimatedSprite(idle_frames);
     anim.scale.set(0.3)
     anim.x = app.screen.width / 2;
-    anim.y = app.screen.height / 2;
-    anim.anchor.set(0.2, 0.5)
+    anim.y = app.screen.height-30;
+    anim.anchor.set(0.2, 1)
     anim.run = function() {
         this.textures = run_frames
         this.type = "run"
@@ -202,7 +227,7 @@ function createGameScene() {
             this.idle()
         }
     }
-    anim.idle()
+    anim.walk()
     anim.direction = 1
     gameScene.addChild(anim);
 
@@ -287,10 +312,10 @@ function createGameScene() {
 
 function makeShadowFilter(target) {
     var dropShadowFilter = new PIXI.filters.DropShadowFilter()
-    dropShadowFilter.color = 0x000020
-    dropShadowFilter.alpha = 0.2
-    dropShadowFilter.blur = 2
-    dropShadowFilter.distance = 5
+    dropShadowFilter.color = 0xffffff
+    dropShadowFilter.alpha = 0.9
+    dropShadowFilter.blur = 4
+    dropShadowFilter.distance = 1
     if (target.filters) {
         target.filters.push(dropShadowFilter)
     }else{
@@ -304,6 +329,9 @@ function gameLoop(delta) {
 }
 
 function play(delta) {
+    bg.tilePosition.x -= 0.2
+
+
     // 檢查是否 match
     // var match_count = 0
     // for (let index = 0; index < 16; index++) {
