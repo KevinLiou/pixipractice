@@ -47,17 +47,17 @@ app.renderer.backgroundColor = 0xedfcff;
 
 PIXI.loader
     .add([
-        "images/BG/BG.png",
-        "images/Adventurer/1/run1.json",
-        "images/Adventurer/1/idle1.json",
-        "images/Adventurer/1/walk1.json",
-        "images/Adventurer/1/jump1.json",
-        "images/Adventurer/1/dead1.json",
-        "images/Adventurer/2/run2.json",
-        "images/Adventurer/2/idle2.json",
-        "images/Adventurer/2/walk2.json",
-        "images/Adventurer/2/jump2.json",
-        "images/Adventurer/2/dead2.json"
+        "images/bg/bg.png",
+        "images/adventurer/1/run1.json",
+        "images/adventurer/1/idle1.json",
+        "images/adventurer/1/walk1.json",
+        "images/adventurer/1/jump1.json",
+        "images/adventurer/1/dead1.json",
+        "images/adventurer/2/run2.json",
+        "images/adventurer/2/idle2.json",
+        "images/adventurer/2/walk2.json",
+        "images/adventurer/2/jump2.json",
+        "images/adventurer/2/dead2.json"
     ])
     .on("progress", loadProgressHandler)
     .load(setup);
@@ -135,7 +135,7 @@ function createGameScene() {
     gameScene = new Container();
     app.stage.addChild(gameScene);
     bg = new PIXI.extras.TilingSprite(
-        PIXI.Texture.fromImage("images/BG/BG.png"),
+        PIXI.Texture.fromImage("images/bg/bg.png"),
         app.screen.width,
         app.screen.height
     )
@@ -151,7 +151,7 @@ function createGameScene() {
 
     let actions = ["run", "idle", "walk", "jump", "dead"]
     actions.map(function(value, index, array) {
-        let number_of_frames = Object.keys(resources["images/Adventurer/" + role + "/" + value + "" + role + ".json"].textures).length
+        let number_of_frames = Object.keys(resources["images/adventurer/" + role + "/" + value + "" + role + ".json"].textures).length
         for (var i = 0; i < number_of_frames; i++) {
             if(value == "run") {
                 run_frames.push(PIXI.Texture.fromFrame('run' + role + '_' + (i + 1) + '.png'))
