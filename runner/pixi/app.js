@@ -167,8 +167,8 @@ function createGameScene() {
         }
     })
 
-    var anim = new PIXI.extras.AnimatedSprite(idle_frames);
-    anim.scale.set(0.3)
+    var anim = new PIXI.extras.AnimatedSprite(walk_frames);
+    // anim.scale.set(0.3)
     anim.x = app.screen.width / 2;
     anim.y = app.screen.height-30*scale;
     anim.anchor.set(0.2, 1)
