@@ -233,82 +233,82 @@ function createGameScene() {
     gameScene.addChild(anim);
 
 
-    var run = new Text("快跑")
-    run.interactive = true
-    run.buttonMode = true
-    run.x = 45
-    run.y = 35
-    run.pointerdown = function(e) {
-        anim.run()
-    }
-    makeShadowFilter(run)
-    gameScene.addChild(run)
+    // var run = new Text("快跑")
+    // run.interactive = true
+    // run.buttonMode = true
+    // run.x = 45
+    // run.y = 35
+    // run.pointerdown = function(e) {
+    //     anim.run()
+    // }
+    // makeShadowFilter(run)
+    // gameScene.addChild(run)
 
-    var turn = new Text("轉向")
-    turn.interactive = true
-    turn.buttonMode = true
-    turn.x = 45
-    turn.y = 70
-    turn.pointerdown = function(e) {
-        anim.turn(-1*anim.direction)
-    }
-    makeShadowFilter(turn)
-    gameScene.addChild(turn)
+    // var turn = new Text("轉向")
+    // turn.interactive = true
+    // turn.buttonMode = true
+    // turn.x = 45
+    // turn.y = 70
+    // turn.pointerdown = function(e) {
+    //     anim.turn(-1*anim.direction)
+    // }
+    // makeShadowFilter(turn)
+    // gameScene.addChild(turn)
 
-    var walk = new Text("慢慢走")
-    walk.interactive = true
-    walk.buttonMode = true
-    walk.x = 45
-    walk.y = 105
-    walk.pointerdown = function(e) {
-        anim.walk()
-    }
-    makeShadowFilter(walk)
-    gameScene.addChild(walk)
+    // var walk = new Text("慢慢走")
+    // walk.interactive = true
+    // walk.buttonMode = true
+    // walk.x = 45
+    // walk.y = 105
+    // walk.pointerdown = function(e) {
+    //     anim.walk()
+    // }
+    // makeShadowFilter(walk)
+    // gameScene.addChild(walk)
 
-    var idle = new Text("停止")
-    idle.interactive = true
-    idle.buttonMode = true
-    idle.x = 45
-    idle.y = 140
-    idle.pointerdown = function(e) {
-        anim.idle()
-    }
-    makeShadowFilter(idle)
-    gameScene.addChild(idle)
+    // var idle = new Text("停止")
+    // idle.interactive = true
+    // idle.buttonMode = true
+    // idle.x = 45
+    // idle.y = 140
+    // idle.pointerdown = function(e) {
+    //     anim.idle()
+    // }
+    // makeShadowFilter(idle)
+    // gameScene.addChild(idle)
 
-    var jump = new Text("跳躍")
-    jump.interactive = true
-    jump.buttonMode = true
-    jump.x = 45
-    jump.y = 175
-    jump.pointerdown = function(e) {
-        anim.jump()
-    }
-    makeShadowFilter(jump)
-    gameScene.addChild(jump)
+    // var jump = new Text("跳躍")
+    // jump.interactive = true
+    // jump.buttonMode = true
+    // jump.x = 45
+    // jump.y = 175
+    // jump.pointerdown = function(e) {
+    //     anim.jump()
+    // }
+    // makeShadowFilter(jump)
+    // gameScene.addChild(jump)
 
-    var dead = new Text("死亡")
-    dead.interactive = true
-    dead.buttonMode = true
-    dead.x = 45
-    dead.y = 210
-    dead.pointerdown = function(e) {
-        anim.dead()
-    }
-    makeShadowFilter(dead)
-    gameScene.addChild(dead)
+    // var dead = new Text("死亡")
+    // dead.interactive = true
+    // dead.buttonMode = true
+    // dead.x = 45
+    // dead.y = 210
+    // dead.pointerdown = function(e) {
+    //     anim.dead()
+    // }
+    // makeShadowFilter(dead)
+    // gameScene.addChild(dead)
 
-    var speed_up = new Text("快跑加速")
-    speed_up.interactive = true
-    speed_up.buttonMode = true
-    speed_up.x = 45
-    speed_up.y = 245
-    speed_up.pointerdown = function(e) {
-        anim.speed_up()
-    }
-    makeShadowFilter(speed_up)
-    gameScene.addChild(speed_up)
+    // var speed_up = new Text("快跑加速")
+    // speed_up.interactive = true
+    // speed_up.buttonMode = true
+    // speed_up.x = 45
+    // speed_up.y = 245
+    // speed_up.pointerdown = function(e) {
+    //     anim.speed_up()
+    // }
+    // makeShadowFilter(speed_up)
+    // gameScene.addChild(speed_up)
 }
 
 function makeShadowFilter(target) {
