@@ -1,303 +1,303 @@
 {
 	"frames": {
-		"walk1_1.png": {
+		"walk1_10.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
-			}
-		},
-		"walk1_10.png": {
-			"frame": {
-				"x": 157,
-				"y": 1,
-				"w": 154,
-				"h": 141
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 154,
-				"h": 141
-			},
-			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_11.png": {
 			"frame": {
-				"x": 313,
+				"x": 617,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_12.png": {
 			"frame": {
-				"x": 469,
+				"x": 1233,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_13.png": {
 			"frame": {
-				"x": 625,
+				"x": 1849,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_14.png": {
 			"frame": {
-				"x": 781,
+				"x": 2465,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_15.png": {
 			"frame": {
-				"x": 937,
+				"x": 3081,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
+			}
+		},
+		"walk1_1.png": {
+			"frame": {
+				"x": 3697,
+				"y": 1,
+				"w": 614,
+				"h": 564
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 614,
+				"h": 564
+			},
+			"sourceSize": {
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_2.png": {
 			"frame": {
-				"x": 1093,
+				"x": 4313,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_3.png": {
 			"frame": {
-				"x": 1249,
+				"x": 4929,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_4.png": {
 			"frame": {
-				"x": 1405,
+				"x": 5545,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_5.png": {
 			"frame": {
-				"x": 1561,
+				"x": 6161,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_6.png": {
 			"frame": {
-				"x": 1717,
+				"x": 6777,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_7.png": {
 			"frame": {
-				"x": 1873,
+				"x": 7393,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_8.png": {
 			"frame": {
-				"x": 2029,
+				"x": 8009,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		},
 		"walk1_9.png": {
 			"frame": {
-				"x": 2185,
+				"x": 8625,
 				"y": 1,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			},
 			"sourceSize": {
-				"w": 154,
-				"h": 141
+				"w": 614,
+				"h": 564
 			}
 		}
 	},
@@ -307,8 +307,8 @@
 		"image": "walk1.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 2340,
-			"h": 143
+			"w": 9240,
+			"h": 566
 		},
 		"scale": "1"
 	}
