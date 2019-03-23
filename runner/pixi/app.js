@@ -48,11 +48,11 @@ app.renderer.backgroundColor = 0xedfcff;
 PIXI.loader
     .add([
         "images/bg/bg.png",
-        "images/adventurer/1/run1.json",
-        "images/adventurer/1/idle1.json",
+        // "images/adventurer/1/run1.json",
+        // "images/adventurer/1/idle1.json",
         "images/adventurer/1/walk1.json",
-        "images/adventurer/1/jump1.json",
-        "images/adventurer/1/dead1.json",
+        // "images/adventurer/1/jump1.json",
+        // "images/adventurer/1/dead1.json",
         // "images/adventurer/2/run2.json",
         // "images/adventurer/2/idle2.json",
         // "images/adventurer/2/walk2.json",
@@ -149,7 +149,8 @@ function createGameScene() {
     var jump_frames = []
     var dead_frames = []
 
-    let actions = ["run", "idle", "walk", "jump", "dead"]
+    // let actions = ["run", "idle", "walk", "jump", "dead"]
+    let actions = ["walk"]
     actions.map(function(value, index, array) {
         let number_of_frames = Object.keys(resources["images/adventurer/" + role + "/" + value + "" + role + ".json"].textures).length
         for (var i = 0; i < number_of_frames; i++) {
