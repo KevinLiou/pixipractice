@@ -53,11 +53,11 @@ PIXI.loader
         "images/adventurer/1/walk1.json",
         "images/adventurer/1/jump1.json",
         "images/adventurer/1/dead1.json",
-        "images/adventurer/2/run2.json",
-        "images/adventurer/2/idle2.json",
-        "images/adventurer/2/walk2.json",
-        "images/adventurer/2/jump2.json",
-        "images/adventurer/2/dead2.json"
+        // "images/adventurer/2/run2.json",
+        // "images/adventurer/2/idle2.json",
+        // "images/adventurer/2/walk2.json",
+        // "images/adventurer/2/jump2.json",
+        // "images/adventurer/2/dead2.json"
     ])
     .on("progress", loadProgressHandler)
     .load(setup);
